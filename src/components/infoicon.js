@@ -30,12 +30,6 @@ const infoButtonStyle = {
     cursor: 'pointer',
     fontSize: '40px',
     background: 'none',
-    border: '2px solid white',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    display: 'flex',
-    justifyContent: 'center',
 };
 
 const infoModalStyle = {
