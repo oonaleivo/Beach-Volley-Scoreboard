@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Beach-Volley-Scoreboard/static/css/main.f855e6bc.css",
-    "main.js": "/Beach-Volley-Scoreboard/static/js/main.b0f279cb.js",
+    "main.js": "/Beach-Volley-Scoreboard/static/js/main.e801c1b8.js",
     "static/js/453.1a6c8e8b.chunk.js": "/Beach-Volley-Scoreboard/static/js/453.1a6c8e8b.chunk.js",
     "static/media/logo.svg": "/Beach-Volley-Scoreboard/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/Beach-Volley-Scoreboard/index.html",
     "main.f855e6bc.css.map": "/Beach-Volley-Scoreboard/static/css/main.f855e6bc.css.map",
-    "main.b0f279cb.js.map": "/Beach-Volley-Scoreboard/static/js/main.b0f279cb.js.map",
+    "main.e801c1b8.js.map": "/Beach-Volley-Scoreboard/static/js/main.e801c1b8.js.map",
     "453.1a6c8e8b.chunk.js.map": "/Beach-Volley-Scoreboard/static/js/453.1a6c8e8b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.b0f279cb.js"
+    "static/js/main.e801c1b8.js"
   ]
 }
