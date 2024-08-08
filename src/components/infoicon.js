@@ -12,7 +12,8 @@ const InfoIcon = () => {
             <h2 style={{color: 'black'}}>Scoreboard info</h2>
             <p style={{color: 'black'}}>
                 This is a scoreboard for beach volley games. Sets go to 21 points with 2 point difference, and possible
-                third set is to 15. The scoreboard will also alert to switch sides every 7 points.</p>
+                third set is to 15. The scoreboard will also alert to switch sides every 7 points and in the third set
+                every five points.</p>
             <button style={buttonSmallStyle} onClick={toggleInfo}>Close</button>
         </div>
     );

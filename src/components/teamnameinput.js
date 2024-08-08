@@ -12,21 +12,31 @@ const TeamNameInput = ({ onSetTeamNames }) => {
         }
     };
 
+    const handleTeam1NameChange = (e) => {
+        const name = e.target.value.slice(0, 15); // Limit to 15 characters
+        setTeam1Name(name);
+    };
+
+    const handleTeam2NameChange = (e) => {
+        const name = e.target.value.slice(0, 15); // Limit to 15 characters
+        setTeam2Name(name);
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2 style={{margin: '5px', fontSize: '24px'}}>Enter Team Names</h2>
+            <h2 style={{ margin: '5px', fontSize: '24px' }}>Enter Team Names</h2>
             <input
                 type="text"
                 placeholder="Team 1 Name"
                 value={team1Name}
-                onChange={(e) => setTeam1Name(e.target.value)}
+                onChange={handleTeam1NameChange}
                 style={{ marginBottom: '5px', padding: '5px' }}
             />
             <input
                 type="text"
                 placeholder="Team 2 Name"
                 value={team2Name}
-                onChange={(e) => setTeam2Name(e.target.value)}
+                onChange={handleTeam2NameChange}
                 style={{ marginBottom: '10px', padding: '5px' }}
             />
             <button style={buttonSmallStyle} onClick={handleSetNames}>Set Names</button>

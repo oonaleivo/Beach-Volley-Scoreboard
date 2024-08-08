@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ScoreBoard = ({team1Name, team2Name}) => {
+const ScoreBoard = ({ team1Name, team2Name }) => {
     const [team1Points, setTeam1Points] = useState(0);
     const [team2Points, setTeam2Points] = useState(0);
     const [team1Sets, setTeam1Sets] = useState(0);
@@ -79,7 +79,11 @@ const ScoreBoard = ({team1Name, team2Name}) => {
     }, [team1Sets, team2Sets]);
 
     useEffect(() => {
-        if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
+        if (team1Sets === 1 && team2Sets === 1) {
+            if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0 && team1Points + team2Points !== 0) { 
+            showMessage('Switch sides!');
+        }}
+        else if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
             showMessage('Switch sides!');
         }
     }, [team1Points, team2Points]);
@@ -96,27 +100,25 @@ const ScoreBoard = ({team1Name, team2Name}) => {
                     </div>
                 )
             }
-        
+
             <div style={{ display: 'flex', justifyContent: 'center', width: '400px', margin: '0 auto' }}>
-                <div style={{ marginRight: '10px' }}>
-                    <h2 style={{ margin: '5px' }}>{team1Name}</h2>
+                <div style={{ marginRight: '2px' }}>
+                    <h3 style={{ margin: '5px' }}>{team1Name}</h3>
                     <button style={button1Style} onClick={() => handleAddPoint('team1')}><div style={numberStyle}>{team1Points}</div></button>
-                    <div style={{fontSize: '66px', textAlign: 'center' }}>{team1Sets}</div>
+                    <div style={{ fontSize: '66px', textAlign: 'center' }}>{team1Sets}</div>
                 </div>
-                <div style={{ marginLeft: '10px' }}>
-                    <h2 style={{ margin: '5px' }}>{team2Name}</h2>
+                <div style={{ marginLeft: '2px' }}>
+                    <h3 style={{ margin: '5px' }}>{team2Name}</h3>
                     <button style={button2Style} onClick={() => handleAddPoint('team2')}><div style={numberStyle}>{team2Points}</div></button>
-                    <div style={{fontSize: '66px', textAlign: 'center' }}>{team2Sets}</div>
+                    <div style={{ fontSize: '66px', textAlign: 'center' }}>{team2Sets}</div>
                 </div>
             </div>
             <div>
                 <button style={buttonSmallStyle} onClick={handleResetScores}>Reset Scores</button>
                 <button style={buttonSmallStyle} onClick={handleResetSets}>Reset Sets</button>
-                
-
             </div>
-            <h2 style={{margin: '5px'}}>Set Results</h2>
-            <ul style={{alignItems: 'center', padding: '5px', margin: '0px'}}>
+            <h2 style={{ margin: '5px' }}>Set Results</h2>
+            <ul style={{ alignItems: 'center', padding: '5px', margin: '0px' }}>
                 {setResults.map((result, index) => (
                     <li key={index}>Set {index + 1}: {result.team1} - {result.team2}</li>
                 ))}
@@ -138,7 +140,7 @@ const pastelColors = {
 const button1Style = {
     backgroundColor: pastelColors.green,
     color: 'white',
-    width: '200px',
+    width: '250px',
     padding: '15px',
     border: 'none',
     borderRight: '2px solid #000',
@@ -149,7 +151,7 @@ const button1Style = {
 const button2Style = {
     backgroundColor: pastelColors.pink,
     color: 'white',
-    width: '200px',
+    width: '250px',
     padding: '15px',
     border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 const Timer = () => {
     const [time, setTime] = useState({ minutes: 0, seconds: 0 });
-    const [isRunning, setIsRunning] = useState(true);
+    const [isRunning, setIsRunning] = useState(false);
 
     useEffect(() => {
-        let interval = null;
+        let interval = null;    
 
         if (isRunning) {
             interval = setInterval(() => {
