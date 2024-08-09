@@ -42,6 +42,14 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
         }
     };
 
+    const handleRemovePoint = (team) => {
+        if (team === 'team1') {
+            setTeam1Points(prevPoints => Math.max(prevPoints - 1, 0));
+        } else if (team === 'team2') {
+            setTeam2Points(prevPoints => Math.max(prevPoints - 1, 0));
+        }
+    }
+
     const handleAddSetPoint = (team, team1Score, team2Score) => {
         if (team === 'team1') {
             setTeam1Sets(prevSets => prevSets + 1);
@@ -69,7 +77,10 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
 
     const showMessage = (msg) => {
         setMessage(msg);
-        setTimeout(() => setMessage(''), 4000);
+    };
+
+    const clearMessage = () => {
+        setMessage('');
     };
 
     useEffect(() => {
@@ -96,7 +107,8 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                         position: 'fixed', fontSize: '40px', top: '35%', left: '50%', transform: 'translate(-50%, -50%)',
                         backgroundColor: 'red', padding: '70px', zIndex: 100, paddingLeft: '100px', paddingRight: '100px'
                     }}>
-                        {message}
+                        <div>{message}</div>
+                        <button style={buttonSmallStyle} onClick={clearMessage}>Ok</button>
                     </div>
                 )
             }
@@ -105,11 +117,13 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                 <div style={{ marginRight: '2px' }}>
                     <h3 style={{ margin: '5px' }}>{team1Name}</h3>
                     <button style={button1Style} onClick={() => handleAddPoint('team1')}><div style={numberStyle}>{team1Points}</div></button>
+                    <button style={buttonSmallStyle} onClick={() => handleRemovePoint('team1')}>Remove Point</button>
                     <div style={{ fontSize: '66px', textAlign: 'center' }}>{team1Sets}</div>
                 </div>
                 <div style={{ marginLeft: '2px' }}>
                     <h3 style={{ margin: '5px' }}>{team2Name}</h3>
                     <button style={button2Style} onClick={() => handleAddPoint('team2')}><div style={numberStyle}>{team2Points}</div></button>
+                    <button style={buttonSmallStyle} onClick={() => handleRemovePoint('team2')}>Remove Point</button>
                     <div style={{ fontSize: '66px', textAlign: 'center' }}>{team2Sets}</div>
                 </div>
             </div>
