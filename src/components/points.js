@@ -104,8 +104,8 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
             {
                 message && (
                     <div style={{
-                        position: 'fixed', fontSize: '40px', top: '35%', left: '50%', transform: 'translate(-50%, -50%)',
-                        backgroundColor: 'red', padding: '70px', zIndex: 100, paddingLeft: '100px', paddingRight: '100px'
+                        position: 'fixed', fontSize: '60px', top: '55%', left: '50%', transform: 'translate(-50%, -50%)',
+                        backgroundColor: 'red', padding: '120px', zIndex: 100, paddingLeft: '100px', paddingRight: '100px'
                     }}>
                         <div>{message}</div>
                         <button style={buttonSmallStyle} onClick={clearMessage}>Ok</button>
