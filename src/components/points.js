@@ -100,31 +100,28 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     }, [team1Points, team2Points]);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={containerStyle}>
             {
                 message && (
-                    <div style={{
-                        position: 'fixed', fontSize: '60px', top: '55%', left: '50%', transform: 'translate(-50%, -50%)',
-                        backgroundColor: 'red', padding: '120px', zIndex: 100, paddingLeft: '100px', paddingRight: '100px'
-                    }}>
+                    <div style={messageBoxStyle}>
                         <div>{message}</div>
                         <button style={buttonSmallStyle} onClick={clearMessage}>Ok</button>
                     </div>
                 )
             }
 
-            <div style={{ display: 'flex', justifyContent: 'center', width: '400px', margin: '0 auto' }}>
+            <div style={scoreBoardStyle}>
                 <div style={{ marginRight: '2px' }}>
-                    <h3 style={{ margin: '5px' }}>{team1Name}</h3>
+                    <h3 style={teamNameStyle}>{team1Name}</h3>
                     <button style={button1Style} onClick={() => handleAddPoint('team1')}><div style={numberStyle}>{team1Points}</div></button>
                     <button style={buttonSmallStyle} onClick={() => handleRemovePoint('team1')}>Remove Point</button>
-                    <div style={{ fontSize: '66px', textAlign: 'center' }}>{team1Sets}</div>
+                    <div style={setStyle}>{team1Sets}</div>
                 </div>
                 <div style={{ marginLeft: '2px' }}>
-                    <h3 style={{ margin: '5px' }}>{team2Name}</h3>
+                    <h3 style={teamNameStyle}>{team2Name}</h3>
                     <button style={button2Style} onClick={() => handleAddPoint('team2')}><div style={numberStyle}>{team2Points}</div></button>
                     <button style={buttonSmallStyle} onClick={() => handleRemovePoint('team2')}>Remove Point</button>
-                    <div style={{ fontSize: '66px', textAlign: 'center' }}>{team2Sets}</div>
+                    <div style={setStyle}>{team2Sets}</div>
                 </div>
             </div>
             <div>
@@ -132,7 +129,7 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                 <button style={buttonSmallStyle} onClick={handleResetSets}>Reset Sets</button>
             </div>
             <h2 style={{ margin: '5px' }}>Set Results</h2>
-            <ul style={{ alignItems: 'center', padding: '5px', margin: '0px' }}>
+            <ul style={setResultListStyle}>
                 {setResults.map((result, index) => (
                     <li key={index}>Set {index + 1}: {result.team1} - {result.team2}</li>
                 ))}
@@ -141,6 +138,54 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     );
 };
 
+// Styles
+const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '10px',
+    maxWidth: '600px',
+    margin: '0 auto'
+};
+
+const messageBoxStyle = {
+    position: 'fixed',
+    fontSize: '8vw',  // Adjusts based on screen width
+    top: '55%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'maroon',
+    padding: '25vw',  // Adjusts based on screen width
+    zIndex: 100,
+    textAlign: 'center',
+    borderRadius: '10px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+};
+
+const scoreBoardStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',  // Full width for flexibility
+    margin: '0 auto',
+};
+
+const teamNameStyle = {
+    margin: '5px',
+    fontSize: '4vw',  // Adjusts based on screen width
+    textAlign: 'center',
+};
+
+const setStyle = {
+    fontSize: '10vw',  // Adjusts based on screen width
+    textAlign: 'center',
+};
+
+const setResultListStyle = {
+    alignItems: 'center',
+    padding: '5px',
+    margin: '0px',
+    fontSize: '4vw',  // Adjusts based on screen width
+};
 
 const pastelColors = {
     pink: '#FFC0CB',
@@ -154,10 +199,9 @@ const pastelColors = {
 const button1Style = {
     backgroundColor: pastelColors.green,
     color: 'white',
-    width: '200px',
+    width: '45vw', // Adjusts based on screen width
     padding: '15px',
     border: 'none',
-    borderRight: '2px solid #000',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
 };
@@ -165,7 +209,7 @@ const button1Style = {
 const button2Style = {
     backgroundColor: pastelColors.pink,
     color: 'white',
-    width: '200px',
+    width: '45vw', // Adjusts based on screen width
     padding: '15px',
     border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
@@ -174,8 +218,8 @@ const button2Style = {
 
 const buttonSmallStyle = {
     backgroundColor: '#FFFFE0',
-    fontSize: '13px',
-    padding: '7px',
+    fontSize: '3vw',  // Adjusts based on screen width
+    padding: '1vw',  // Adjusts based on screen width
     cursor: 'pointer',
     margin: '2px',
     borderRadius: '5px',
@@ -183,7 +227,7 @@ const buttonSmallStyle = {
 
 const numberStyle = {
     color: 'black',
-    fontSize: '170px',
+    fontSize: '30vw',  // Adjusts based on screen width
 };
 
 export default ScoreBoard;
