@@ -150,12 +150,12 @@ const containerStyle = {
 
 const messageBoxStyle = {
     position: 'fixed',
-    fontSize: '8vw',  // Adjusts based on screen width
+    fontSize: '4vw',  // Adjusts based on screen width
     top: '55%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'maroon',
-    padding: '25vw',  // Adjusts based on screen width
+    padding: '15vw',  // Adjusts based on screen width
     zIndex: 100,
     textAlign: 'center',
     borderRadius: '10px',
