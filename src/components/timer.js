@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Timer = () => {
-    const [time, setTime] = useState({ minutes: 0, seconds: 0 });
+    const [time, setTime] = useState({ hours: 0, minutes: 0, seconds: 0 });
     const [isRunning, setIsRunning] = useState(false);
 
     useEffect(() => {
@@ -11,8 +11,9 @@ const Timer = () => {
             interval = setInterval(() => {
                 setTime(prevTime => {
                     const seconds = prevTime.seconds + 1;
-                    const minutes = Math.floor(seconds / 60);
-                    return { minutes, seconds: seconds % 60 };
+                    const minutes = prevTime.minutes + Math.floor(seconds / 60);
+                    const hours = prevTime.hours + Math.floor(minutes / 60);
+                    return { hours, minutes: minutes % 60, seconds: seconds % 60 };
                 });
             }, 1000);
         }
@@ -29,7 +30,7 @@ const Timer = () => {
     };
 
     const handleReset = () => {
-        setTime({ minutes: 0, seconds: 0 });
+        setTime({ hours: 0, minutes: 0, seconds: 0 });
     };
 
     const formatTime = (value) => {
@@ -45,6 +46,7 @@ const Timer = () => {
         </div>
     );
 };
+
 const buttonSmallStyle = {
     backgroundColor: '#FFFFE0',
     fontSize: '13px',

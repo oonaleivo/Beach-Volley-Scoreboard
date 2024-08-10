@@ -154,7 +154,7 @@ const pastelColors = {
 const button1Style = {
     backgroundColor: pastelColors.green,
     color: 'white',
-    width: '250px',
+    width: '200px',
     padding: '15px',
     border: 'none',
     borderRight: '2px solid #000',
@@ -165,7 +165,7 @@ const button1Style = {
 const button2Style = {
     backgroundColor: pastelColors.pink,
     color: 'white',
-    width: '250px',
+    width: '200px',
     padding: '15px',
     border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
@@ -183,8 +183,7 @@ const buttonSmallStyle = {
 
 const numberStyle = {
     color: 'black',
-    fontSize: '130px',
-    border: '2px solid #000',
+    fontSize: '170px',
 };
 
 export default ScoreBoard;
