@@ -7,6 +7,7 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     const [team2Sets, setTeam2Sets] = useState(0);
     const [message, setMessage] = useState('');
     const [setResults, setSetResults] = useState([]);
+    const [isSwitched, setIsSwitched] = useState(false);
 
     const handleAddPoint = (team) => {
         if (team === 'team1') {
@@ -82,6 +83,10 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     const clearMessage = () => {
         setMessage('');
     };
+    
+    const handleManualSwitch = () => {
+        setIsSwitched(prevState => !prevState);
+    };
 
     useEffect(() => {
         if (team1Sets === 2 || team2Sets === 2) {
@@ -91,43 +96,74 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
 
     useEffect(() => {
         if (team1Sets === 1 && team2Sets === 1) {
-            if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0 && team1Points + team2Points !== 0) { 
-            showMessage('Switch sides!');
-        }}
+            if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0 && team1Points + team2Points !== 0) {
+                showMessage('Switch sides!');
+                setIsSwitched(prevState => !prevState);
+            }
+        }
         else if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
             showMessage('Switch sides!');
+            setIsSwitched(prevState => !prevState);
         }
     }, [team1Points, team2Points]);
 
     return (
         <div style={containerStyle}>
-            {
-                message && (
-                    <div style={messageBoxStyle}>
-                        <div>{message}</div>
-                        <button style={buttonSmallStyle} onClick={clearMessage}>Ok</button>
-                    </div>
-                )
-            }
+            {message && (
+                <div style={messageBoxStyle}>
+                    <div>{message}</div>
+                    <button style={buttonSmallStyle} onClick={clearMessage}>Ok</button>
+                </div>
+            )}
 
             <div style={scoreBoardStyle}>
-                <div style={{ marginRight: '2px' }}>
-                    <h3 style={teamNameStyle}>{team1Name}</h3>
-                    <button style={button1Style} onClick={() => handleAddPoint('team1')}><div style={numberStyle}>{team1Points}</div></button>
-                    <button style={buttonSmallStyle} onClick={() => handleRemovePoint('team1')}>Remove Point</button>
-                    <div style={setStyle}>{team1Sets}</div>
-                </div>
-                <div style={{ marginLeft: '2px' }}>
-                    <h3 style={teamNameStyle}>{team2Name}</h3>
-                    <button style={button2Style} onClick={() => handleAddPoint('team2')}><div style={numberStyle}>{team2Points}</div></button>
-                    <button style={buttonSmallStyle} onClick={() => handleRemovePoint('team2')}>Remove Point</button>
-                    <div style={setStyle}>{team2Sets}</div>
-                </div>
+                {isSwitched ? (
+                    <>
+                        <TeamBox
+                            teamName={team2Name}
+                            teamPoints={team2Points}
+                            teamSets={team2Sets}
+                            handleAddPoint={() => handleAddPoint('team2')}
+                            handleRemovePoint={() => handleRemovePoint('team2')}
+                            buttonStyle={button2Style}
+                        />
+                        <TeamBox
+                            teamName={team1Name}
+                            teamPoints={team1Points}
+                            teamSets={team1Sets}
+                            handleAddPoint={() => handleAddPoint('team1')}
+                            handleRemovePoint={() => handleRemovePoint('team1')}
+                            buttonStyle={button1Style}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <TeamBox
+                            teamName={team1Name}
+                            teamPoints={team1Points}
+                            teamSets={team1Sets}
+                            handleAddPoint={() => handleAddPoint('team1')}
+                            handleRemovePoint={() => handleRemovePoint('team1')}
+                            buttonStyle={button1Style}
+                        />
+                        <TeamBox
+                            teamName={team2Name}
+                            teamPoints={team2Points}
+                            teamSets={team2Sets}
+                            handleAddPoint={() => handleAddPoint('team2')}
+                            handleRemovePoint={() => handleRemovePoint('team2')}
+                            buttonStyle={button2Style}
+                        />
+                    </>
+                )}
             </div>
+
             <div>
+                <button style={buttonSmallStyle} onClick={handleManualSwitch}>Switch Score Sides</button>
                 <button style={buttonSmallStyle} onClick={handleResetScores}>Reset Scores</button>
                 <button style={buttonSmallStyle} onClick={handleResetSets}>Reset Sets</button>
             </div>
+
             <h2 style={{ margin: '5px' }}>Set Results</h2>
             <ul style={setResultListStyle}>
                 {setResults.map((result, index) => (
@@ -137,6 +173,16 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
         </div>
     );
 };
+
+const TeamBox = ({ teamName, teamPoints, teamSets, handleAddPoint, handleRemovePoint, buttonStyle }) => (
+    <div style={{ margin: '0 10px' }}>
+        <h3 style={{ margin: '5px' }}>{teamName}</h3>
+        <button style={buttonStyle} onClick={handleAddPoint}><div style={numberStyle}>{teamPoints}</div></button>
+        <button style={buttonSmallStyle} onClick={handleRemovePoint}>Remove Point</button>
+        <div style={setStyle}>{teamSets}</div>
+    </div>
+);
+
 
 // Styles
 const containerStyle = {
