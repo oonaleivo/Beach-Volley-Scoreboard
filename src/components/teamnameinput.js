@@ -39,15 +39,15 @@ const TeamNameInput = ({ onSetTeamNames }) => {
                 onChange={handleTeam2NameChange}
                 style={{ marginBottom: '10px', padding: '5px' }}
             />
-            <button style={buttonSmallStyle} onClick={handleSetNames}>Set Names</button>
+            <button style={buttonSmallStyle} onClick={handleSetNames}>Submit Team Names</button>
         </div>
     );
 };
 
 const buttonSmallStyle = {
-    backgroundColor: '#FFFFE0',
-    fontSize: '13px',
-    padding: '7px',
+    backgroundColor: 'white',
+    fontSize: '3vw',  // Adjusts based on screen width
+    padding: '1vw',  // Adjusts based on screen width
     cursor: 'pointer',
     margin: '2px',
     borderRadius: '5px',

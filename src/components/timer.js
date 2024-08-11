@@ -48,9 +48,9 @@ const Timer = () => {
 };
 
 const buttonSmallStyle = {
-    backgroundColor: '#FFFFE0',
-    fontSize: '13px',
-    padding: '7px',
+    backgroundColor: 'white',
+    fontSize: '3vw',  // Adjusts based on screen width
+    padding: '1vw',  // Adjusts based on screen width
     cursor: 'pointer',
     margin: '2px',
     borderRadius: '5px',

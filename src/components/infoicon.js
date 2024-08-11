@@ -9,11 +9,11 @@ const InfoIcon = () => {
 
     const InfoModal = () => (
         <div style={infoModalStyle}>
-            <h2 style={{color: 'black'}}>Scoreboard info</h2>
+            <h3 style={{color: 'black'}}>Scoreboard info</h3>
             <p style={{color: 'black'}}>
-                This is a scoreboard for beach volley games. Sets go to 21 points with 2 point difference, and possible
-                third set is to 15. The scoreboard will also alert to switch sides every 7 points and in the third set
-                every five points.</p>
+                Sets go to 21 points with 2 point difference, and possible
+                third set to 15. The scoreboard will also alert to switch sides every 7 points and in the third set
+                every 5 points. Team score sides can be manually switched. </p>
             <button style={buttonSmallStyle} onClick={toggleInfo}>Close</button>
         </div>
     );
@@ -29,27 +29,27 @@ const InfoIcon = () => {
 const infoButtonStyle = {
     color: 'white',
     cursor: 'pointer',
-    fontSize: '40px',
+    fontSize: '5vw',
     background: 'none',
 };
 
 const infoModalStyle = {
     position: 'fixed',
-    top: '50%',
+    fontSize: '3vw',  // Adjusts based on screen width
+    top: '55%',
     left: '50%',
-    backgroundColor: 'white',
     transform: 'translate(-50%, -50%)',
-    padding: '10px',
-    zIndex: 100,
+    backgroundColor: 'white',
+    padding: '2vw',  // Adjusts based on screen width
+    zIndex: 20,
+    borderRadius: '5px',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    borderRadius: '8px',
-    width: '400px',
 };
 
 const buttonSmallStyle = {
-    backgroundColor: '#FFFFE0',
-    fontSize: '13px',
-    padding: '7px',
+    backgroundColor: 'white',
+    fontSize: '3vw',  // Adjusts based on screen width
+    padding: '1vw',  // Adjusts based on screen width
     cursor: 'pointer',
     margin: '2px',
     borderRadius: '5px',

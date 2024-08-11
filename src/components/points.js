@@ -263,7 +263,7 @@ const button2Style = {
 };
 
 const buttonSmallStyle = {
-    backgroundColor: '#FFFFE0',
+    backgroundColor: 'white',
     fontSize: '3vw',  // Adjusts based on screen width
     padding: '1vw',  // Adjusts based on screen width
     cursor: 'pointer',
