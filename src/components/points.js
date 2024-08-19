@@ -245,7 +245,7 @@ const pastelColors = {
 const button1Style = {
     backgroundColor: pastelColors.green,
     color: 'white',
-    width: '45vw', // Adjusts based on screen width
+    width: '42vw', // Adjusts based on screen width
     padding: '15px',
     border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
@@ -255,7 +255,7 @@ const button1Style = {
 const button2Style = {
     backgroundColor: pastelColors.pink,
     color: 'white',
-    width: '45vw', // Adjusts based on screen width
+    width: '42vw', // Adjusts based on screen width
     padding: '15px',
     border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
