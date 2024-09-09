@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-image: url('./beachsand.jpg');
+  background-size: cover; /* Makes the image cover the entire background */
+  background-position: center; /* Centers the background image */
+  min-height: 100vh; /* Makes the background fill the entire viewport */
+  color: black;
 }
 
 .App-logo {
@@ -14,14 +19,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {

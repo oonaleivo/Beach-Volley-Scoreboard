@@ -27,9 +27,9 @@ const InfoIcon = () => {
 };
 
 const infoButtonStyle = {
-    color: 'white',
+    color: 'red',
     cursor: 'pointer',
-    fontSize: '5vw',
+    fontSize: '4vw',
     background: 'none',
 };
 

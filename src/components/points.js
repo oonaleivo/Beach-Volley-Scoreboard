@@ -243,23 +243,23 @@ const pastelColors = {
 };
 
 const button1Style = {
-    backgroundColor: pastelColors.green,
+    backgroundColor: pastelColors.blue,
     color: 'white',
-    width: '42vw', // Adjusts based on screen width
+    width: '43vw', // Adjusts based on screen width
     padding: '15px',
-    border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
+    border: '2px solid black',
 };
 
 const button2Style = {
     backgroundColor: pastelColors.pink,
     color: 'white',
-    width: '42vw', // Adjusts based on screen width
+    width: '43vw', // Adjusts based on screen width
     padding: '15px',
-    border: 'none',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
+    border: '2px solid black',
 };
 
 const buttonSmallStyle = {
@@ -267,7 +267,7 @@ const buttonSmallStyle = {
     fontSize: '3vw',  // Adjusts based on screen width
     padding: '1vw',  // Adjusts based on screen width
     cursor: 'pointer',
-    margin: '2px',
+    margin: '7px',
     borderRadius: '5px',
 };
 
