@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 style={{margin: '10px'}}>Beach Volley Scoreboard</h1>
+        <h1 style={{margin: '10px'}}>Beach & Indoor Volleyball Scoreboard</h1>
         <InfoIcon />
         <TeamNameInput onSetTeamNames={handleSetTeamNames} />
         <Timer />

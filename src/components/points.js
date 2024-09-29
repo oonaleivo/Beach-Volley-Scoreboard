@@ -8,39 +8,76 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     const [message, setMessage] = useState('');
     const [setResults, setSetResults] = useState([]);
     const [isSwitched, setIsSwitched] = useState(false);
+    const [mode, setMode] = useState('beach'); // beach or indoor
 
     const handleAddPoint = (team) => {
         if (team === 'team1') {
             setTeam1Points(prevPoints => {
                 const newPoints = prevPoints + 1;
-                if (newPoints >= 21 && newPoints - team2Points >= 2) {
-                    handleAddSetPoint('team1', newPoints, team2Points);
-                    return 0;
-                }
-                else if (team1Sets === 1 && team2Sets === 1) {
-                    if (newPoints >= 15 && newPoints - team2Points >= 2) {
+                if (mode === 'beach') {
+                    console.log('in beach');
+                    if (newPoints >= 21 && newPoints - team2Points >= 2) {
                         handleAddSetPoint('team1', newPoints, team2Points);
                         return 0;
+                    } else if (team1Sets === 1 && team2Sets === 1) {
+                        if (newPoints >= 15 && newPoints - team2Points >= 2) {
+                            handleAddSetPoint('team1', newPoints, team2Points);
+                            return 0;
+                        }
+                    }
+
+                }
+
+                else if (mode === 'indoor') {
+                    console.log('in indoor');
+                    if (newPoints >= 25 && newPoints - team2Points >= 2) {
+                        handleAddSetPoint('team1', newPoints, team2Points);
+                        return 0;
+                    } else if (team1Sets === 2 && team2Sets === 2) {
+                        if (newPoints >= 15 && newPoints - team2Points >= 2) {
+                            handleAddSetPoint('team1', newPoints, team2Points);
+                            return 0;
+                        }
                     }
                 }
                 return newPoints;
             });
+
         } else if (team === 'team2') {
             setTeam2Points(prevPoints => {
                 const newPoints = prevPoints + 1;
-                if (newPoints >= 21 && newPoints - team1Points >= 2) {
-                    handleAddSetPoint('team2', team1Points, newPoints);
-                    return 0;
-                }
-                else if (team1Sets === 1 && team2Sets === 1) {
-                    if (newPoints >= 15 && newPoints - team1Points >= 2) {
+                if (mode === 'beach') {
+                    if (newPoints >= 21 && newPoints - team1Points >= 2) {
                         handleAddSetPoint('team2', team1Points, newPoints);
                         return 0;
                     }
+                    else if (team1Sets === 1 && team2Sets === 1) {
+                        if (newPoints >= 15 && newPoints - team1Points >= 2) {
+                            handleAddSetPoint('team2', team1Points, newPoints);
+                            return 0;
+                        }
+                    }
+                } else if (mode === 'indoor') {
+                    if (newPoints >= 25 && newPoints - team1Points >= 2) {
+                        handleAddSetPoint('team2', team1Points, newPoints); // Corrected here
+                        return 0;
+                    } else if (team1Sets === 2 && team2Sets === 2) {
+                        if (newPoints >= 15 && newPoints - team1Points >= 2) {
+                            handleAddSetPoint('team2', team1Points, newPoints); // Corrected here
+                            return 0;
+                        }
+                    }
                 }
+
                 return newPoints;
             });
         }
+    };
+
+    const handleToggleMode = () => {
+        setMode(prevMode => prevMode === 'beach' ? 'indoor' : 'beach');
+        handleResetScores();
+        handleResetSets();
     };
 
     const handleRemovePoint = (team) => {
@@ -83,27 +120,32 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     const clearMessage = () => {
         setMessage('');
     };
-    
+
     const handleManualSwitch = () => {
         setIsSwitched(prevState => !prevState);
     };
 
     useEffect(() => {
-        if (team1Sets === 2 || team2Sets === 2) {
+        if (mode === 'beach' && (team1Sets === 2 || team2Sets === 2)) {
             showMessage('Game Over! Please reset the points and sets.');
         }
-    }, [team1Sets, team2Sets]);
+        else if (mode === 'indoor' && (team1Sets === 3 || team2Sets === 3)) {
+            showMessage('Game Over! Please reset the points and sets.');
+        }
+    }, [team1Sets, team2Sets, mode]);
 
     useEffect(() => {
-        if (team1Sets === 1 && team2Sets === 1) {
-            if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0 && team1Points + team2Points !== 0) {
+        if (mode === 'beach') {
+            if (team1Sets === 1 && team2Sets === 1) {
+                if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0 && team1Points + team2Points !== 0) {
+                    showMessage('Switch sides!');
+                    setIsSwitched(prevState => !prevState);
+                }
+            }
+            else if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
                 showMessage('Switch sides!');
                 setIsSwitched(prevState => !prevState);
             }
-        }
-        else if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
-            showMessage('Switch sides!');
-            setIsSwitched(prevState => !prevState);
         }
     }, [team1Points, team2Points]);
 
@@ -115,7 +157,12 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                     <button style={buttonSmallStyle} onClick={clearMessage}>Ok</button>
                 </div>
             )}
-
+            <button onClick={handleToggleMode} style={buttonSmallStyle}>
+                Switch to {mode === 'beach' ? 'Indoor' : 'Beach'} Mode
+            </button>
+            <div style={{ margin: '5px', fontSize: '25px', backgroundColor: 'yellow' }}>
+                Current Mode: {mode.charAt(0).toUpperCase() + mode.slice(1)}
+            </div>
             <div style={scoreBoardStyle}>
                 {isSwitched ? (
                     <>
@@ -156,6 +203,7 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                         />
                     </>
                 )}
+
             </div>
 
             <div>
