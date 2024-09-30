@@ -30,14 +30,14 @@ const TeamNameInput = ({ onSetTeamNames }) => {
                 placeholder="Team 1 Name"
                 value={team1Name}
                 onChange={handleTeam1NameChange}
-                style={{ marginBottom: '5px', padding: '5px' }}
+                style={{ marginBottom: '5px', padding: '5px', border: '1px solid black' }}
             />
             <input
                 type="text"
                 placeholder="Team 2 Name"
                 value={team2Name}
                 onChange={handleTeam2NameChange}
-                style={{ marginBottom: '10px', padding: '5px' }}
+                style={{ marginBottom: '10px', padding: '5px', border: '1px solid black' }}
             />
             <button style={buttonSmallStyle} onClick={handleSetNames}>Submit Team Names</button>
         </div>

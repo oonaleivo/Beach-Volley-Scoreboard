@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+// ScoreBoard component to manage the score and sets of two teams
 const ScoreBoard = ({ team1Name, team2Name }) => {
+    // State variables to manage points, sets, messages, and other states
     const [team1Points, setTeam1Points] = useState(0);
     const [team2Points, setTeam2Points] = useState(0);
     const [team1Sets, setTeam1Sets] = useState(0);
@@ -8,14 +10,16 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     const [message, setMessage] = useState('');
     const [setResults, setSetResults] = useState([]);
     const [isSwitched, setIsSwitched] = useState(false);
-    const [mode, setMode] = useState('beach'); // beach or indoor
+    const [mode, setMode] = useState('beach'); // 'beach' or 'indoor'
 
+    // Function to handle adding points to a team
     const handleAddPoint = (team) => {
         if (team === 'team1') {
             setTeam1Points(prevPoints => {
                 const newPoints = prevPoints + 1;
                 if (mode === 'beach') {
                     console.log('in beach');
+                    // Check if team1 wins the set in beach mode
                     if (newPoints >= 21 && newPoints - team2Points >= 2) {
                         handleAddSetPoint('team1', newPoints, team2Points);
                         return 0;
@@ -25,11 +29,9 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                             return 0;
                         }
                     }
-
-                }
-
-                else if (mode === 'indoor') {
+                } else if (mode === 'indoor') {
                     console.log('in indoor');
+                    // Check if team1 wins the set in indoor mode
                     if (newPoints >= 25 && newPoints - team2Points >= 2) {
                         handleAddSetPoint('team1', newPoints, team2Points);
                         return 0;
@@ -42,52 +44,54 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                 }
                 return newPoints;
             });
-
         } else if (team === 'team2') {
             setTeam2Points(prevPoints => {
                 const newPoints = prevPoints + 1;
                 if (mode === 'beach') {
+                    // Check if team2 wins the set in beach mode
                     if (newPoints >= 21 && newPoints - team1Points >= 2) {
                         handleAddSetPoint('team2', team1Points, newPoints);
                         return 0;
-                    }
-                    else if (team1Sets === 1 && team2Sets === 1) {
+                    } else if (team1Sets === 1 && team2Sets === 1) {
                         if (newPoints >= 15 && newPoints - team1Points >= 2) {
                             handleAddSetPoint('team2', team1Points, newPoints);
                             return 0;
                         }
                     }
                 } else if (mode === 'indoor') {
+                    // Check if team2 wins the set in indoor mode
                     if (newPoints >= 25 && newPoints - team1Points >= 2) {
-                        handleAddSetPoint('team2', team1Points, newPoints); // Corrected here
+                        handleAddSetPoint('team2', team1Points, newPoints);
                         return 0;
                     } else if (team1Sets === 2 && team2Sets === 2) {
                         if (newPoints >= 15 && newPoints - team1Points >= 2) {
-                            handleAddSetPoint('team2', team1Points, newPoints); // Corrected here
+                            handleAddSetPoint('team2', team1Points, newPoints);
                             return 0;
                         }
                     }
                 }
-
                 return newPoints;
             });
         }
     };
 
+    // Function to toggle between beach and indoor modes
     const handleToggleMode = () => {
         setMode(prevMode => prevMode === 'beach' ? 'indoor' : 'beach');
         handleResetScores();
         handleResetSets();
     };
 
+    // Function to handle removing points from a team
     const handleRemovePoint = (team) => {
         if (team === 'team1') {
             setTeam1Points(prevPoints => Math.max(prevPoints - 1, 0));
         } else if (team === 'team2') {
             setTeam2Points(prevPoints => Math.max(prevPoints - 1, 0));
         }
-    }
+    };
 
+    // Function to handle adding a set point to a team
     const handleAddSetPoint = (team, team1Score, team2Score) => {
         if (team === 'team1') {
             setTeam1Sets(prevSets => prevSets + 1);
@@ -100,49 +104,52 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
         }
     };
 
-
+    // Function to reset the scores of both teams
     const handleResetScores = () => {
         setTeam1Points(0);
         setTeam2Points(0);
     };
 
+    // Function to reset the sets of both teams
     const handleResetSets = () => {
         setTeam1Sets(0);
         setTeam2Sets(0);
         setSetResults([]);
     };
 
-
+    // Function to display a message
     const showMessage = (msg) => {
         setMessage(msg);
     };
 
+    // Function to clear the displayed message
     const clearMessage = () => {
         setMessage('');
     };
 
+    // Function to manually switch the score sides
     const handleManualSwitch = () => {
         setIsSwitched(prevState => !prevState);
     };
 
+    // Effect to show game over message when a team wins the game
     useEffect(() => {
         if (mode === 'beach' && (team1Sets === 2 || team2Sets === 2)) {
             showMessage('Game Over! Please reset the points and sets.');
-        }
-        else if (mode === 'indoor' && (team1Sets === 3 || team2Sets === 3)) {
+        } else if (mode === 'indoor' && (team1Sets === 3 || team2Sets === 3)) {
             showMessage('Game Over! Please reset the points and sets.');
         }
     }, [team1Sets, team2Sets, mode]);
 
+    // Effect to show switch sides message based on points in beach mode
     useEffect(() => {
         if (mode === 'beach') {
             if (team1Sets === 1 && team2Sets === 1) {
-                if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0 && team1Points + team2Points !== 0) {
+                if ((team1Points + team2Points) % 5 === 0 && team1Points + team2Points !== 0) {
                     showMessage('Switch sides!');
                     setIsSwitched(prevState => !prevState);
                 }
-            }
-            else if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
+            } else if ((team1Points + team2Points) % 7 === 0 && team1Points + team2Points !== 0) {
                 showMessage('Switch sides!');
                 setIsSwitched(prevState => !prevState);
             }
@@ -203,7 +210,6 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
                         />
                     </>
                 )}
-
             </div>
 
             <div>
@@ -222,6 +228,7 @@ const ScoreBoard = ({ team1Name, team2Name }) => {
     );
 };
 
+// TeamBox component to display team information and controls
 const TeamBox = ({ teamName, teamPoints, teamSets, handleAddPoint, handleRemovePoint, buttonStyle }) => (
     <div style={{ margin: '0 10px' }}>
         <h3 style={{ margin: '5px' }}>{teamName}</h3>
@@ -230,7 +237,6 @@ const TeamBox = ({ teamName, teamPoints, teamSets, handleAddPoint, handleRemoveP
         <div style={setStyle}>{teamSets}</div>
     </div>
 );
-
 
 // Styles
 const containerStyle = {
@@ -298,6 +304,7 @@ const button1Style = {
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
     border: '2px solid black',
+    borderRadius: '5px',
 };
 
 const button2Style = {
@@ -308,6 +315,7 @@ const button2Style = {
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
     border: '2px solid black',
+    borderRadius: '5px',
 };
 
 const buttonSmallStyle = {
@@ -317,6 +325,7 @@ const buttonSmallStyle = {
     cursor: 'pointer',
     margin: '7px',
     borderRadius: '5px',
+    
 };
 
 const numberStyle = {
