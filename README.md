@@ -1,3 +1,5 @@
+Try this app out at https://oonaleivo.github.io/Beach-Volley-Scoreboard/
+
 This React application is a scoreboard for beach and indoor volleyball games. It allows users to track points and sets for each team.
 In beach mode sets go to 21 points with 2 point difference, and possible third set to 15. The scoreboard will also alert to switch sides every 7 points and in the third set every 5 points. 
 In indoor mode sets go to 25 points with 2 point difference, and possible fifth set to 15. 
